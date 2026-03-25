@@ -8,6 +8,9 @@ petstore:
   service:
     product:
       url: ${PETSTOREPRODUCTSERVICE_URL:http://localhost:8082}
+    order-items-reserver:
+      url: ${ORDER_ITEMS_RESERVER_URL:http://localhost:62301}
+      x-functions-key: ${ORDER_ITEMS_RESERVER_FUNCTION_KEY}
 
 springdoc:
   api-docs:
