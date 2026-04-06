@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 public class CacheService {
 
     private final CacheManager cacheManager;
+    private final OrderCosmosRepository orderCosmosRepository;
 
     public int getOrdersCacheSize() {
         try {
-            org.springframework.cache.concurrent.ConcurrentMapCache mapCache =
-                    (org.springframework.cache.concurrent.ConcurrentMapCache) cacheManager.getCache("orders");
-            return mapCache != null ? mapCache.getNativeCache().size() : 0;
+            long ordersCount = orderCosmosRepository.countOrders();
+            return (int) Math.min(Integer.MAX_VALUE, ordersCount);
         } catch (Exception e) {
-            log.warn("Could not get orders cache size: {}", e.getMessage());
+            log.warn("Could not get orders count from Cosmos DB: {}", e.getMessage());
             return 0;
         }
     }
