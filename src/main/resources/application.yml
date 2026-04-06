@@ -12,6 +12,12 @@ petstore:
       url: ${ORDER_ITEMS_RESERVER_URL:http://localhost:62301}
       x-functions-key: ${ORDER_ITEMS_RESERVER_FUNCTION_KEY}
 
+azure:
+  cosmos:
+    connection-string: ${AZURE_COSMOS_CONNECTION_STRING}
+    database: ${AZURE_COSMOS_DATABASE:petstore}
+    container: ${AZURE_COSMOS_CONTAINER:orders}
+
 springdoc:
   api-docs:
     path: /api-docs
