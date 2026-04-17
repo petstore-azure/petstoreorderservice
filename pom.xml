@@ -24,6 +24,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
         <httpclient.version>4.5.14</httpclient.version>
         <azure.cosmos.version>4.68.0</azure.cosmos.version>
+        <azure.servicebus.version>7.17.17</azure.servicebus.version>
     </properties>
 
     <dependencies>
@@ -62,6 +63,11 @@
             <groupId>com.azure</groupId>
             <artifactId>azure-cosmos</artifactId>
             <version>${azure.cosmos.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-messaging-servicebus</artifactId>
+            <version>${azure.servicebus.version}</version>
         </dependency>
     </dependencies>
 
