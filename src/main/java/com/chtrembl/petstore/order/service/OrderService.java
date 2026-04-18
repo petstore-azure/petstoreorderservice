@@ -67,8 +67,9 @@ public class OrderService {
 
         Optional<Order> existingOrder = orderCosmosRepository.findById(orderId);
         if (existingOrder.isPresent()) {
-            log.info("Found existing order for update: {}", orderId);
-            return existingOrder.get();
+            Order order = existingOrder.get();
+            log.info("Found existing order for update: {}, order: {}", orderId, order);
+            return order;
         }
 
         // Create new order if not found
