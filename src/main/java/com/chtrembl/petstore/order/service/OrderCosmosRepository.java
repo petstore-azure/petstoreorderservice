@@ -34,7 +34,15 @@ public class OrderCosmosRepository {
 
     public Order upsert(Order order) {
         try {
-            return ordersContainer.upsertItem(order, new PartitionKey(order.getId()), null).getItem();
+            Order upsertedItem = ordersContainer.upsertItem(order, new PartitionKey(order.getId()), null).getItem();
+
+            // If getItem() returns null, return the input order since it was successfully persisted
+            if (upsertedItem != null) {
+                return upsertedItem;
+            }
+
+            log.warn("Cosmos DB upsert response item was null for order {}, returning input order", order.getId());
+            return order;
         } catch (CosmosException exception) {
             log.error("Error upserting order {} in Cosmos DB", order.getId(), exception);
             throw exception;
